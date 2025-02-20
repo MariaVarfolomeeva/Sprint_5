@@ -9,6 +9,7 @@ def driver():
     yield driver
     driver.quit()
 
+
 def test_transition_from_personal_account_to_constructor(driver):
     driver.get("https://stellarburgers.site/account")
 
