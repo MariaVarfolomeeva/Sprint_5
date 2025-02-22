@@ -1,6 +1,6 @@
 import pytest
 from utils.locators import *
-from fixtures.driver import get_driver
+from fixtures.conftest import get_driver
 
 
 @pytest.fixture
