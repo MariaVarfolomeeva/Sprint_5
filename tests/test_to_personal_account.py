@@ -1,19 +1,12 @@
 import pytest
 from utils.locators import *
-from fixtures.conftest import get_driver
-
-
-@pytest.fixture
-def driver():
-    driver = get_driver()
-    yield driver
-    driver.quit()
+from fixtures.conftest import BASE_URL, ACCOUNT_URL
 
 
 def test_transition_to_personal_account(driver):
-    driver.get("https://stellarburgers.site/")
+    driver.get(BASE_URL)
 
     driver.find_element(*PERSONAL_ACCOUNT_BUTTON).click()
 
-    assert driver.current_url == "https://stellarburgers.site/account"
-    driver.quit()
+    assert driver.current_url == ACCOUNT_URL
+

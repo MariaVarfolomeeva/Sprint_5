@@ -1,18 +1,11 @@
 import pytest
 from utils.locators import *
-from fixtures.conftest import get_driver
+from fixtures.conftest import BASE_URL, ACCOUNT_URL
 
-@pytest.fixture
-def driver():
-    driver = get_driver()
-    yield driver
-    driver.quit()
 
 def test_logout(driver):
-    driver.get("https://stellarburgers.site/account")
+    driver.get(ACCOUNT_URL)
 
     driver.find_element(*LOGOUT_BUTTON).click()
 
-    assert driver.current_url == "https://stellarburgers.site/"
-
-    driver.quit()
+    assert driver.current_url == BASE_URL

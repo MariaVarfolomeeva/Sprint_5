@@ -1,15 +1,10 @@
 import pytest
 from utils.locators import *
-from fixtures.conftest import get_driver
+from fixtures.conftest import REGISTER_URL
 
-@pytest.fixture
-def driver():
-    driver = get_driver()
-    yield driver
-    driver.quit()
 
 def test_successful_registration(driver):
-    driver.get("https://stellarburgers.site/register")
+    driver.get(REGISTER_URL)
 
     driver.find_element(*NAME_FIELD).send_keys("Test Testov")
     driver.find_element(*EMAIL_FIELD).send_keys("testtestov1999@yandex.ru")
@@ -19,10 +14,9 @@ def test_successful_registration(driver):
 
     assert driver.find_element(*REGISTER_SUCCESS_MESSAGE)
 
-    driver.quit()
 
 def test_registration_with_invalid_password(driver):
-    driver.get("https://stellarburgers.site/register")
+    driver.get(REGISTER_URL)
 
     driver.find_element(*NAME_FIELD).send_keys("Test Testov")
     driver.find_element(*EMAIL_FIELD).send_keys("testtestov1999@yandex.ru")
@@ -32,5 +26,3 @@ def test_registration_with_invalid_password(driver):
 
     error_message = driver.find_element(*PASSWORD_ERROR_MESSAGE).text
     assert "Пароль слишком короткий" in error_message
-
-    driver.quit()
